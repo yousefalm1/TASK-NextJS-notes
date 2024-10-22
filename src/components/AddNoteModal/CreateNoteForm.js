@@ -1,5 +1,6 @@
 import { createNote } from "@/actions/notes";
 
+import Input from "../Input";
 import TopicInputList from "./TopicInputList";
 
 function CreateNoteForm({ closeModal }) {
@@ -14,12 +15,7 @@ function CreateNoteForm({ closeModal }) {
           >
             Title
           </label>
-          <input
-            type="text"
-            name="title"
-            className="w-full px-4 py-2 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
+          <Input type="text" name="title" required />
         </div>
         <div className="mb-4">
           <label
