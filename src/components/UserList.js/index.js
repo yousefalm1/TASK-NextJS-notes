@@ -1,5 +1,3 @@
-import Image from "next/image"
-
 import UserCard from "./UserCard"
 
 function UserList({ users }) {
