@@ -3,9 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { notFound, redirect } from "next/navigation";
 
-const baseUrl = "https://task-react-auth-backend.eapi.joincoded.com/api";
-const headers = new Headers()
-headers.append("Content-Type", "application/json")
+import { baseUrl, headers } from "./config";
 
 export async function fetchNotes() {
   const response = await fetch(`${baseUrl}/notes`);
