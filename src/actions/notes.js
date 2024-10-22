@@ -14,5 +14,12 @@ export async function fetchNotes() {
 }
 
 export async function createNote(formData) {
-  console.log(formData)
+  const note = Object.fromEntries(formData)
+
+  const response = await fetch(`${baseUrl}/notes`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(note)
+  })
+  const newNote = await response.json()
 }
