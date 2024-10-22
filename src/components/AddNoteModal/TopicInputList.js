@@ -1,11 +1,10 @@
+import { useState } from "react";
+
 import TopicInput from "./TopicInput"
 
-function TopicInputList({ topics, setTopics }) {
-  const handleTopicChange = (e, index) => {
-    const updatedTopics = [...topics];
-    updatedTopics[index] = e.target.value;
-    setTopics(updatedTopics);
-  };
+function TopicInputList() {
+  const [topics, setTopics] = useState([]);
+
   const handleAddTopic = () => {
     setTopics([...topics, ""]);
   };
@@ -16,13 +15,10 @@ function TopicInputList({ topics, setTopics }) {
     setTopics(updatedTopics);
   };
 
-
-  const topicInputs = topics.map((topic, index) => (
+  const topicInputs = topics.map((_, index) => (
     <TopicInput
-      key={topic + index}
-      topic={topic}
+      key={index}
       index={index}
-      handleTopicChange={handleTopicChange}
       handleRemoveTopic={handleRemoveTopic} />
   ))
 
