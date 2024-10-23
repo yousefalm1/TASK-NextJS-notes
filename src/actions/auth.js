@@ -1,5 +1,7 @@
 'use server'
 
+import { setToken } from "@/lib/token";
+
 import { baseUrl, headers } from "./config"
 
 export async function login(formData) {
@@ -12,6 +14,7 @@ export async function login(formData) {
   })
 
   const { token } = await response.json()
+  setToken(token)
 }
 
 export async function register(formData) {
@@ -21,6 +24,7 @@ export async function register(formData) {
   })
 
   const { token } = await response.json()
+  setToken(token)
 }
 
 export async function getAllUsers() {
