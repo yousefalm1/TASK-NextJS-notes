@@ -1,9 +1,9 @@
 'use server'
 
 import { revalidatePath } from "next/cache";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 
-import { baseUrl, headers } from "./config";
+import { baseUrl, getHeaders } from "./config";
 
 export async function fetchNotes() {
   const response = await fetch(`${baseUrl}/notes`);
@@ -25,8 +25,11 @@ export async function createNote(formData) {
 
   const response = await fetch(`${baseUrl}/notes`, {
     method: "POST",
-    headers,
+    headers: await getHeaders(),
     body: JSON.stringify(note)
   })
-  const newNote = await response.json()
+
+  await response.json()
+
+  revalidatePath('/notes')
 }

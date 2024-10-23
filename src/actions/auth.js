@@ -1,16 +1,17 @@
 'use server'
 
 import { deleteToken, getUser, setToken } from "@/lib/token";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-import { baseUrl, headers } from "./config"
+import { baseUrl, getHeaders } from "./config"
 
 export async function login(formData) {
   const userData = Object.fromEntries(formData);
 
   const response = await fetch(`${baseUrl}/auth/login`, {
     method: "POST",
-    headers,
+    headers: await getHeaders(),
     body: JSON.stringify(userData)
   })
 
@@ -29,6 +30,7 @@ export async function register(formData) {
   const { token } = await response.json()
   await setToken(token)
 
+  revalidatePath('/users')
   redirect('/notes')
 }
 
