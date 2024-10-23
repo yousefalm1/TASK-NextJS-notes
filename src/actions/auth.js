@@ -1,6 +1,7 @@
 'use server'
 
-import { setToken } from "@/lib/token";
+import { deleteToken, getUser, setToken } from "@/lib/token";
+import { redirect } from "next/navigation";
 
 import { baseUrl, headers } from "./config"
 
@@ -14,7 +15,9 @@ export async function login(formData) {
   })
 
   const { token } = await response.json()
-  setToken(token)
+  await setToken(token)
+
+  redirect('/notes')
 }
 
 export async function register(formData) {
@@ -24,7 +27,14 @@ export async function register(formData) {
   })
 
   const { token } = await response.json()
-  setToken(token)
+  await setToken(token)
+
+  redirect('/notes')
+}
+
+export async function logout() {
+  await deleteToken()
+  console.log(await getUser())
 }
 
 export async function getAllUsers() {

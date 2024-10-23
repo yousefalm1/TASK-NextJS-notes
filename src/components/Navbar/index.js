@@ -1,8 +1,10 @@
+import { getUser } from "@/lib/token";
 import Link from "next/link";
 
+import AuthButtons from "./AuthButtons";
 import NavLink from "./NavLink";
 
-function Navbar() {
+async function Navbar() {
   return (
     <nav className="bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -25,15 +27,7 @@ function Navbar() {
               <NavLink href="/users">
                 Users
               </NavLink>
-
-              <>
-                <NavLink href="/login">
-                  Login
-                </NavLink>
-                <NavLink href="/register">
-                  Register
-                </NavLink>
-              </>
+              <AuthButtons />
             </div>
           </div>
         </div>
