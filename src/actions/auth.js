@@ -34,7 +34,7 @@ export async function register(formData) {
 
 export async function logout() {
   await deleteToken()
-  console.log(await getUser())
+  redirect('/')
 }
 
 export async function getAllUsers() {

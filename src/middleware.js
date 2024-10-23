@@ -2,13 +2,18 @@ import { NextResponse } from "next/server";
 
 import { getUser } from "./lib/token"
 
+const privateRoutes = ['/users']
 const publicRoutes = ['/login', '/register']
 
 export default async function middleware(req) {
   const path = req.nextUrl.pathname
   const isPublicRoute = publicRoutes.includes(path)
+  const isPrivateRoute = privateRoutes.includes(path)
 
   const user = await getUser();
+
+  if (isPrivateRoute && !user)
+    return NextResponse.redirect(new URL('/login', req.nextUrl))
 
   if (isPublicRoute && user)
     return NextResponse.redirect(new URL('/notes', req.nextUrl))

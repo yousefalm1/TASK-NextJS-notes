@@ -5,6 +5,8 @@ import AuthButtons from "./AuthButtons";
 import NavLink from "./NavLink";
 
 async function Navbar() {
+  const user = await getUser()
+
   return (
     <nav className="bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -24,9 +26,9 @@ async function Navbar() {
               <NavLink href="/notes">
                 Notes
               </NavLink>
-              <NavLink href="/users">
+              {user && <NavLink href="/users">
                 Users
-              </NavLink>
+              </NavLink>}
               <AuthButtons />
             </div>
           </div>
