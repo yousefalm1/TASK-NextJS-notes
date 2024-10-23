@@ -1,13 +1,26 @@
 'use server'
 
-import { baseUrl } from "./config"
+import { baseUrl, headers } from "./config"
 
 export async function login(formData) {
-  console.log(formData)
+  const userData = Object.fromEntries(formData);
+
+  const response = await fetch(`${baseUrl}/auth/login`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(userData)
+  })
+
+  const { token } = await response.json()
 }
 
 export async function register(formData) {
-  console.log(formData)
+  const response = await fetch(`${baseUrl}/auth/register`, {
+    method: "POST",
+    body: formData
+  })
+
+  const { token } = await response.json()
 }
 
 export async function getAllUsers() {
