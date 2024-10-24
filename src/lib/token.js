@@ -23,13 +23,18 @@ export async function getUser() {
   const token = await getToken()
   if (!token) return null
 
-  const user = jwtDecode(token)
-  const currentTime = Date.now() / 1000
+  try {
+    const user = jwtDecode(token)
+    const currentTime = Date.now() / 1000
 
-  if (user.exp < currentTime) {
-    deleteToken()
+    if (user.exp < currentTime) {
+      deleteToken()
+      return null
+    }
+
+    return user
+  } catch (error) {
+    console.error(error)
     return null
   }
-
-  return user
 }
