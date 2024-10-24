@@ -1,4 +1,3 @@
-import { register } from "@/actions/auth";
 import Input from "@/components/Input";
 
 function Register() {
@@ -6,7 +5,8 @@ function Register() {
     <div className="bg-gray-900 min-h-screen flex items-center justify-center absolute inset-0 z-[-1]">
       <div className="max-w-md w-full px-6 py-8 bg-gray-800 rounded-md shadow-md">
         <h2 className="text-3xl text-white font-semibold mb-6">Register</h2>
-        <form action={register}>
+        {/* Wire up the register action */}
+        <form>
           <div className="mb-4">
             <label
               htmlFor="name"

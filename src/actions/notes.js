@@ -29,7 +29,5 @@ export async function createNote(formData) {
     body: JSON.stringify(note)
   })
 
-  await response.json()
-
   revalidatePath('/notes')
 }

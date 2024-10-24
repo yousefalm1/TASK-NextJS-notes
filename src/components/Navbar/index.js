@@ -1,11 +1,9 @@
-import { getUser } from "@/lib/token";
 import Link from "next/link";
 
 import AuthButtons from "./AuthButtons";
 import NavLink from "./NavLink";
 
 async function Navbar() {
-  const user = await getUser()
 
   return (
     <nav className="bg-gray-800">
@@ -26,9 +24,9 @@ async function Navbar() {
               <NavLink href="/notes">
                 Notes
               </NavLink>
-              {user && <NavLink href="/users">
+              <NavLink href="/users">
                 Users
-              </NavLink>}
+              </NavLink>
               <AuthButtons />
             </div>
           </div>

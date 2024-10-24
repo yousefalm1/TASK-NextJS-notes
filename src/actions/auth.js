@@ -1,8 +1,6 @@
 'use server'
 
-import { deleteToken, getUser, setToken } from "@/lib/token";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 import { baseUrl, getHeaders } from "./config"
 
@@ -15,10 +13,9 @@ export async function login(formData) {
     body: JSON.stringify(userData)
   })
 
-  const { token } = await response.json()
-  await setToken(token)
+  // Extract and store the token
 
-  redirect('/notes')
+  // Redirect to the `/notes` page
 }
 
 export async function register(formData) {
@@ -27,16 +24,17 @@ export async function register(formData) {
     body: formData
   })
 
-  const { token } = await response.json()
-  await setToken(token)
+  // Extract and store the token
 
   revalidatePath('/users')
-  redirect('/notes')
+
+  // Redirect to the `/notes` page
 }
 
 export async function logout() {
-  await deleteToken()
-  redirect('/')
+  // What do you need to do to logout?
+
+  // Where should you redirect the user?
 }
 
 export async function getAllUsers() {
