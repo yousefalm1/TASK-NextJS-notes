@@ -15,7 +15,7 @@ export default async function middleware(req) {
     return NextResponse.redirect(new URL('/notes', req.nextUrl));
   // Redirect to `/notes` if a page is public-only
 
-  if (isPrivateRoute) {
+  if (isPrivateRoute && !user) {
     return NextResponse.redirect(new URL('/login', req.nextUrl));
   }
   return NextResponse.next();
